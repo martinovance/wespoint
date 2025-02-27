@@ -38,7 +38,7 @@ const CustomStepIcon = styled("div")<{ active?: boolean }>(({ active }) => ({
   },
 }))
 
-const Registration = () => {
+function Registration() {
   const [activeStep, setActiveStep] = useState(0)
   const { control, handleSubmit, reset } = useForm<FormDataType>()
   const [modal, setModal] = useModal()

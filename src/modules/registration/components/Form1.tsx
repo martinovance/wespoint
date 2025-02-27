@@ -2,7 +2,7 @@ import { FormDataProp, FormDataType } from "@/types/formType"
 import { Grid, InputLabel, MenuItem, TextField } from "@mui/material"
 import { Controller } from "react-hook-form"
 
-const Form1 = ({ control }: FormDataProp<FormDataType>) => {
+function Form1({ control }: FormDataProp<FormDataType>) {
   return (
     <Grid
       container

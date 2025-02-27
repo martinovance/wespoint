@@ -12,13 +12,13 @@ import {
   Typography,
 } from "@mui/material"
 import { useState } from "react"
-import Form1 from "./components/Form1"
 
-import { ReactComponent as Gift } from "@/assets/gift.svg"
+import { ReactComponent as Gift } from "@/assets/Gift.svg"
 import { useForm } from "react-hook-form"
 import useModal from "@/hooks/useModal"
-import SuccessModal from "./modal/SuccessModal"
 import { FormDataType } from "@/types/formType"
+import Form1 from "./components/Form1"
+import SuccessModal from "./modal/SuccessModal"
 
 const DashSteps = ["", "", "", ""]
 

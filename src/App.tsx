@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
 import "./App.css"
 import Loader from "./shared/Loader/Loader"
@@ -12,7 +12,8 @@ function App() {
       <ModalContextProvider>
         <BrowserRouter>
           <Routes>
-            <Route index element={<Registration />} />
+            <Route index element={<Navigate to="register" replace />} />
+            <Route path="register" element={<Registration />} />
           </Routes>
         </BrowserRouter>
       </ModalContextProvider>

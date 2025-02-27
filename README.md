@@ -1,6 +1,9 @@
 # Welcome to WESPoint
 WESPoint ESA for Emplyment Status Test
 
+# Deployed site
+https://wespoint.netlify.app
+
 ## Technologies used
 - vite
 - React-TypeScript

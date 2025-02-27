@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import "./App.css"
 import Loader from "./shared/Loader/Loader"
 import ModalContextProvider from "./contexts/modalContext"
-const Registration = lazy(() => import("@/modules/Registration/Registration"))
+const Registration = lazy(() => import("@/modules/Form/Registration"))
 
 function App() {
   return (

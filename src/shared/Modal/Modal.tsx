@@ -10,6 +10,7 @@ interface ModalProps {
 }
 
 function Modal({ children, modalName, ...others }: ModalProps) {
+  // Access the modal state from the context
   const [state] = useModal()
 
   return (

@@ -19,6 +19,8 @@ import useModal from "@/hooks/useModal"
 import { FormDataType } from "@/types/formType"
 import Form1 from "./components/Form1"
 import SuccessModal from "./modal/SuccessModal"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { validationSchema } from "./validation/validationSchema"
 
 const DashSteps = ["", "", "", ""]
 
@@ -40,27 +42,46 @@ const CustomStepIcon = styled("div")<{ active?: boolean }>(({ active }) => ({
 
 function Registration() {
   const [activeStep, setActiveStep] = useState(0)
-  const { control, handleSubmit, reset } = useForm<FormDataType>()
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    trigger,
+    reset,
+  } = useForm<FormDataType>({
+    resolver: yupResolver(validationSchema),
+  })
   const [modal, setModal] = useModal()
 
-  const handleNext = () => {
-    if (activeStep < DashSteps.length - 1) {
+  const handleNext = async () => {
+    // validate the fields in  this step
+    const isStepValid = await trigger()
+
+    // Check if the current step is not the last step
+    if (isStepValid && activeStep < DashSteps.length - 1) {
       setActiveStep((prev) => prev + 1)
     }
   }
 
   const handlePrev = () => {
+    // Check if the current step is not the first step
     if (activeStep > 0) {
       setActiveStep((prev) => prev - 1)
     }
   }
 
-  const handleSkip = () => {
-    handleNext() // Just moves to the next step
+  const handleSkip = async () => {
+    const isStepValid = await trigger()
+
+    if (isStepValid && activeStep < DashSteps.length - 1) {
+      setActiveStep((prev) => prev + 1)
+    } // Just moves to the next step
   }
 
+  // Function to handle form submission
   const onSubmit = () => {
     // console.log("Form Data Submitted:", data)
+    // Update the modal state to show a success message
     setModal((prev) => ({
       ...prev,
       modal,
@@ -68,7 +89,7 @@ function Registration() {
       message: "Congratulations",
       caption: "You've earned 1000 WESPoint",
     }))
-    reset()
+    reset() // Reset the form fields to their initial state after submission
   }
 
   return (
@@ -139,15 +160,17 @@ function Registration() {
             height: { xs: "auto", sm: 0 },
             whiteSpace: "normal",
             "& .MuiChip-label": {
-              whiteSpace: "normal", // Ensure the label text wraps
-              display: "inline-block", // Allow the label to take up multiple lines
-              textAlign: "left", // Align text to the left
+              whiteSpace: "normal",
+              display: "inline-block",
+              textAlign: "left",
             },
           }}
         />
 
         <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
-          {activeStep === 0 && <Form1 control={control} />}
+          {activeStep === 0 && (
+            <Form1 errors={errors} control={control} trigger={trigger} />
+          )}
         </form>
 
         <Stack
@@ -182,7 +205,7 @@ function Registration() {
             {activeStep === 3 ? (
               <Button
                 variant="contained"
-                type="submit"
+                type="button"
                 onClick={handleSubmit(onSubmit)}
                 sx={{
                   bgcolor: "#0256B2",

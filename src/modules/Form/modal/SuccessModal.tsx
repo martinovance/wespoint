@@ -13,9 +13,9 @@ function SuccessModal({
   const [state, setState] = useModal()
 
   const handleNavigate = () => {
-    setActiveStep(0)
+    setActiveStep(0) // resets activeStep to the first page
 
-    setState({ ...state, modalName: "" })
+    setState({ ...state, modalName: "" }) // updating modal state to close modal
   }
 
   return (

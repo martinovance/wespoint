@@ -2,9 +2,24 @@ body {
   padding: 4rem;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 100px white inset !important;
+  -webkit-text-fill-color: #000000 !important;
+  height: 100% !important;
+}
+
+.MuiInputLabel-root {
+  z-index: 1;
+}
+
 @media (max-width: 683px) {
   body {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 }

@@ -2,7 +2,7 @@ import { FormDataProp, FormDataType } from "@/types/formType"
 import { Grid, InputLabel, MenuItem, TextField } from "@mui/material"
 import { Controller } from "react-hook-form"
 
-function Form1({ control }: FormDataProp<FormDataType>) {
+function Form1({ control, errors, trigger }: FormDataProp<FormDataType>) {
   return (
     <Grid
       container
@@ -33,8 +33,14 @@ function Form1({ control }: FormDataProp<FormDataType>) {
               {...field}
               fullWidth
               select
+              error={!!errors.institution}
+              helperText={errors.institution?.message}
+              onChange={(e) => {
+                field.onChange(e)
+                trigger("institution")
+              }}
               SelectProps={{
-                displayEmpty: true, // Allows the placeholder to be displayed
+                displayEmpty: true,
                 renderValue: (value: unknown) => {
                   if (typeof value !== "string" || value === "") {
                     return <span style={{ color: "#7F8184" }}>WESOnline</span>
@@ -59,7 +65,17 @@ function Form1({ control }: FormDataProp<FormDataType>) {
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <TextField {...field} fullWidth placeholder="100" />
+            <TextField
+              {...field}
+              fullWidth
+              placeholder="100"
+              error={!!errors.journeyLevel}
+              helperText={errors.journeyLevel?.message}
+              onChange={(e) => {
+                field.onChange(e)
+                trigger("journeyLevel")
+              }}
+            />
           )}
         />
       </Grid>
@@ -71,7 +87,17 @@ function Form1({ control }: FormDataProp<FormDataType>) {
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <TextField {...field} fullWidth placeholder="Chemistry" />
+            <TextField
+              {...field}
+              fullWidth
+              placeholder="Chemistry"
+              error={!!errors.fieldOfStudy}
+              helperText={errors.fieldOfStudy?.message}
+              onChange={(e) => {
+                field.onChange(e)
+                trigger("fieldOfStudy")
+              }}
+            />
           )}
         />
       </Grid>
@@ -83,7 +109,17 @@ function Form1({ control }: FormDataProp<FormDataType>) {
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <TextField {...field} fullWidth placeholder="_ _ _ _ _ _" />
+            <TextField
+              {...field}
+              fullWidth
+              placeholder="_ _ _ _ _ _"
+              error={!!errors.gpa}
+              helperText={errors.gpa?.message}
+              onChange={(e) => {
+                field.onChange(e)
+                trigger("gpa")
+              }}
+            />
           )}
         />
       </Grid>
@@ -99,8 +135,14 @@ function Form1({ control }: FormDataProp<FormDataType>) {
               {...field}
               fullWidth
               select
+              error={!!errors.interests}
+              helperText={errors.interests?.message}
+              onChange={(e) => {
+                field.onChange(e)
+                trigger("interests")
+              }}
               SelectProps={{
-                displayEmpty: true, // Allows the placeholder to be displayed
+                displayEmpty: true,
                 renderValue: (value: unknown) => {
                   if (typeof value !== "string" || value === "") {
                     return (
